@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Exam Centre Helper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-map-marker-alt logo-icon"></i>
+                Exam Centre Helper
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="services.html"><i class="fas fa-map-marker-alt"></i> Services</a></li>
+                    <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="policy.html" class="active"><i class="fas fa-file-alt"></i> Policy</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">We're here to help you with any questions or concerns about our services</p>
+
+            <!-- Contact Tabs -->
+            <div class="contact-tabs">
+                <button class="tab-btn active" data-tab="student">
+                    <i class="fas fa-user-graduate"></i>
+                    Student Inquiry
+                </button>
+                <button class="tab-btn" data-tab="shop">
+                    <i class="fas fa-store"></i>
+                    Business/Shop Registration
+                </button>
+                <button class="tab-btn" data-tab="centre">
+                    <i class="fas fa-school"></i>
+                    Exam Centre Registration
+                </button>
+            </div>
+
+        <!-- Student Form -->
+<div class="form-container" id="student-form">
+    <h3>Student Inquiry Form</h3>
+    <p>Have questions about our services or need assistance? Fill out the form below and we'll get back to
+        you soon.</p>
+
+    <form id="studentForm">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="student-name">Full Name</label>
+                <input type="text" id="student-name" name="name" class="form-control"
+                    placeholder="Enter full name" required>
+            </div>
+            <div class="form-group">
+                <label for="student-email">Email Address</label>
+                <input type="email" id="student-email" name="email" class="form-control"
+                    placeholder="Enter Email address" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="student-phone">Phone Number</label>
+                <input type="tel" id="student-phone" name="phone" class="form-control"
+                    placeholder="Enter Phone Number" required>
+            </div>
+            <div class="form-group">
+                <label for="student-city">City</label>
+                <input type="text" id="student-city" name="city" class="form-control"
+                    placeholder="Enter City" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="student-subject">Subject</label>
+            <input type="text" id="student-subject" name="subject" class="form-control"
+                placeholder="Enter Subject" required>
+        </div>
+
+        <div class="form-group">
+            <label for="student-message">Message</label>
+            <textarea id="student-message" name="message" class="form-control"
+                placeholder="Describe Your Query" required></textarea>
+        </div>
+
+        <button type="submit" class="btn">Submit Inquiry</button>
+        <p id="studentSuccess" style="color: green; display:none;">✅ Inquiry submitted with security info!</p>
+        <p id="studentError" style="color: red; display:none;">❌ Something went wrong. Try again.</p>
+    </form>
+</div>
+
+<!-- Business/Shop Form -->
+<div class="form-container" id="shop-form" style="display: none;">
+    <h3>Business/Shop Registration</h3>
+    <p>Register your business to be listed on our platform and reach thousands of students during exam
+        seasons.</p>
+
+    <form id="shopForm">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="shop-name">Business Name</label>
+                <input type="text" id="shop-name" class="form-control"
+                    placeholder="Enter your business name" required>
+            </div>
+            <div class="form-group">
+                <label for="shop-type">Business Type</label>
+                <select id="shop-type" class="form-control" required>
+                    <option value="">Select business type</option>
+                    <option value="cafe">Cafe/Restaurant</option>
+                    <option value="print">Print/Cyber Shop</option>
+                    <option value="stationery">Stationery Store</option>
+                    <option value="accommodation">Accommodation/Hostel</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="shop-owner">Owner/Manager Name</label>
+                <input type="text" id="shop-owner" class="form-control"
+                    placeholder="Enter owner/manager name" required>
+            </div>
+            <div class="form-group">
+                <label for="shop-email">Email Address</label>
+                <input type="email" id="shop-email" class="form-control" placeholder="Enter business email"
+                    required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="shop-phone">Phone Number</label>
+                <input type="tel" id="shop-phone" class="form-control"
+                    placeholder="Enter business phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="shop-city">City</label>
+                <input type="text" id="shop-city" class="form-control" placeholder="Enter business city"
+                    required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="shop-address">Full Address</label>
+            <textarea id="shop-address" class="form-control" placeholder="Enter your business full address"
+                required></textarea>
+        </div>
+
+        <button type="submit" class="btn">Register Business</button>
+        <p id="shopSuccess" style="color: green; display:none;">✅ Our team will contact and verify you soon!</p>
+        <p id="shopError" style="color: red; display:none;">❌ Something went wrong. Try again.</p>
+    </form>
+</div>
+
+<!-- Centre Form -->
+<div class="form-container" id="centre-form" style="display: none;">
+    <h3>Exam Centre Registration</h3>
+    <p>Register your institution as an exam center to be listed on our platform and help students find your
+        location easily.</p>
+
+    <form id="centreForm">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="centre-name">Institution Name</label>
+                <input type="text" id="centre-name" class="form-control"
+                    placeholder="Enter institution name" required>
+            </div>
+            <div class="form-group">
+                <label for="centre-type">Institution Type</label>
+                <select id="centre-type" class="form-control" required>
+                    <option value="">Select institution type</option>
+                    <option value="school">School</option>
+                    <option value="college">College</option>
+                    <option value="university">University</option>
+                    <option value="training">Training Center</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="centre-admin">Admin Name</label>
+                <input type="text" id="centre-admin" class="form-control" placeholder="Enter admin name"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="centre-email">Email Address</label>
+                <input type="email" id="centre-email" class="form-control"
+                    placeholder="Enter institution email" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="centre-phone">Phone Number</label>
+                <input type="tel" id="centre-phone" class="form-control"
+                    placeholder="Enter institution phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="centre-capacity">Exam Capacity</label>
+                <input type="number" id="centre-capacity" class="form-control"
+                    placeholder="Number of students" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="centre-address">Full Address</label>
+            <textarea id="centre-address" class="form-control"
+                placeholder="Enter your institution full address" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="centre-facilities">Available Facilities</label>
+            <textarea id="centre-facilities" class="form-control"
+                placeholder="Describe facilities available at your institution"></textarea>
+        </div>
+
+        <button type="submit" class="btn">Register Exam Centre</button>
+        <p id="centreSuccess" style="color: green; display:none;">✅ Our team will contact and verify you soon!</p>
+        <p id="centreError" style="color: red; display:none;">❌ Something went wrong. Try again.</p>
+    </form>
+</div>
+
+<!-- Google Apps Script Integration with Security Info -->
+<script>
+    // Replace with your Google Apps Script Web App URLs
+    const studentScriptURL = "https://script.google.com/macros/s/AKfycbxKoVHuZka1T3sO7OwiNCUTdZYnI2xdHiLYotZig0VbJqimyC0haSckRAJbsb1Rza6-Rg/exec";
+    const shopScriptURL = "https://script.google.com/macros/s/AKfycbxb77LZAbIHYAsMAEgv7MfIUNWAjLQvNG_F1GGneO_EggMKExwRgpx2qetnjVxpOyEI/exec";
+    const centreScriptURL = "https://script.google.com/macros/s/AKfycbxxu5_0wxyJ5e864vQvtxw3pg0oqiXQbQhg6r9fOU3v3D8amOM1OfL3QdE62kaN_CUZ/exec";
+
+    // ---------- Utility Functions ----------
+    async function getIP() {
+        let res = await fetch("https://api.ipify.org?format=json");
+        let data = await res.json();
+        return data.ip;
+    }
+
+    function getDeviceInfo() {
+        return navigator.userAgent;
+    }
+
+    function getLocation() {
+        return new Promise(resolve => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    pos => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+                    () => resolve(null)
+                );
+            } else {
+                resolve(null);
+            }
+        });
+    }
+
+    // ---------- Student Form Handler ----------
+    document.getElementById("studentForm").addEventListener("submit", async e => {
+        e.preventDefault();
+
+        let ip = await getIP();
+        let device = getDeviceInfo();
+        let location = await getLocation();
+
+        const data = {
+            name: document.getElementById("student-name").value,
+            email: document.getElementById("student-email").value,
+            phone: document.getElementById("student-phone").value,
+            city: document.getElementById("student-city").value,
+            subject: document.getElementById("student-subject").value,
+            message: document.getElementById("student-message").value,
+            ip: ip,
+            device: device,
+            latitude: location ? location.lat : "",
+            longitude: location ? location.lon : ""
+        };
+
+        fetch(studentScriptURL, { method: "POST", body: JSON.stringify(data) })
+            .then(res => {
+                if (res.ok) {
+                    document.getElementById("studentSuccess").style.display = "block";
+                    document.getElementById("studentError").style.display = "none";
+                    document.getElementById("studentForm").reset();
+                } else throw new Error("Network error");
+            })
+            .catch(() => {
+                document.getElementById("studentError").style.display = "block";
+                document.getElementById("studentSuccess").style.display = "none";
+            });
+    });
+
+    // ---------- Shop Form Handler ----------
+    document.getElementById("shopForm").addEventListener("submit", async e => {
+        e.preventDefault();
+
+        let ip = await getIP();
+        let device = getDeviceInfo();
+        let location = await getLocation();
+
+        const data = {
+            name: document.getElementById("shop-name").value,
+            type: document.getElementById("shop-type").value,
+            owner: document.getElementById("shop-owner").value,
+            email: document.getElementById("shop-email").value,
+            phone: document.getElementById("shop-phone").value,
+            city: document.getElementById("shop-city").value,
+            address: document.getElementById("shop-address").value,
+            ip: ip,
+            device: device,
+            latitude: location ? location.lat : "",
+            longitude: location ? location.lon : ""
+        };
+
+        fetch(shopScriptURL, { method: "POST", body: JSON.stringify(data) })
+            .then(res => {
+                if (res.ok) {
+                    document.getElementById("shopSuccess").style.display = "block";
+                    document.getElementById("shopError").style.display = "none";
+                    document.getElementById("shopForm").reset();
+                } else throw new Error("Network error");
+            })
+            .catch(() => {
+                document.getElementById("shopError").style.display = "block";
+                document.getElementById("shopSuccess").style.display = "none";
+            });
+    });
+
+    // ---------- Centre Form Handler ----------
+    document.getElementById("centreForm").addEventListener("submit", async e => {
+        e.preventDefault();
+
+        let ip = await getIP();
+        let device = getDeviceInfo();
+        let location = await getLocation();
+
+        const data = {
+            name: document.getElementById("centre-name").value,
+            type: document.getElementById("centre-type").value,
+            admin: document.getElementById("centre-admin").value,
+            email: document.getElementById("centre-email").value,
+            phone: document.getElementById("centre-phone").value,
+            capacity: document.getElementById("centre-capacity").value,
+            address: document.getElementById("centre-address").value,
+            facilities: document.getElementById("centre-facilities").value,
+            ip: ip,
+            device: device,
+            latitude: location ? location.lat : "",
+            longitude: location ? location.lon : ""
+        };
+
+        fetch(centreScriptURL, { method: "POST", body: JSON.stringify(data) })
+            .then(res => {
+                if (res.ok) {
+                    document.getElementById("centreSuccess").style.display = "block";
+                    document.getElementById("centreError").style.display = "none";
+                    document.getElementById("centreForm").reset();
+                } else throw new Error("Network error");
+            })
+            .catch(() => {
+                document.getElementById("centreError").style.display = "block";
+                document.getElementById("centreSuccess").style.display = "none";
+            });
+    });
+</script>
+
+
+
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone contact-icon"></i>
+                    <span class="contact-text">Call Us</span>
+                    <a href="tel:7518007867" class="contact-link">+91 7518007867</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <span class="contact-text">Email Us</span>
+                    <a href="mailto:nikhil.singh95556@gmail.com" class="contact-link">nikhil.singh95556@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    <span class="contact-text">Location</span>
+                    <a href="#" class="contact-link">Gorakhpur UP, India</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col footer-about">
+                    <h3>About Us</h3>
+                    <p>Exam Centre Helper is dedicated to making exam days less stressful for students. We provide
+                        comprehensive information about amenities and services around exam centers nationwide.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-contact">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> +91 7518007867</p>
+                    <p><i class="fas fa-envelope"></i> nikhil.singh95556@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Gorakhpur UP, India</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Exam Centre Helper. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const forms = {
+            'student': document.getElementById('student-form'),
+            'shop': document.getElementById('shop-form'),
+            'centre': document.getElementById('centre-form')
+        };
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const tab = this.getAttribute('data-tab');
+
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                // Hide all forms
+                Object.values(forms).forEach(form => form.style.display = 'none');
+
+                // Show the selected form
+                if (forms[tab]) {
+                    forms[tab].style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

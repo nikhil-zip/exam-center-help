@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Centre Finder</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-map-marker-alt logo-icon"></i>
+        Exam Centre Helper
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="services.html"><i class="fas fa-map-marker-alt"></i> Services</a></li>
+          <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+          <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li><a href="policy.html" class="active"><i class="fas fa-file-alt"></i> Policy</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+  <!-- Hero Section -->
+
+  <section class="hero">
+    <div class="container">
+      <h1>Find Your Exam Centre Quickly</h1>
+      <p>Locate your exam centre by name or city, view it on Google Maps, and check nearby facilities to ensure a smooth
+        exam day.</p>
+    </div>
+  </section>
+
+
+  <div class="container">
+    <!-- Filters Section -->
+    <section class="filters">
+      <div class="filter-container">
+        <div class="search-box">
+          <label for="search">Search by Centre Name</label>
+          <input type="text" id="search" placeholder="Type to search..." autocomplete="off">
+        </div>
+        <div class="city-filter">
+          <label for="city">Filter by City</label>
+          <select id="city">
+            <option value="">All Cities</option>
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table Section -->
+    <section class="table-container">
+      <table id="centres-table">
+        <thead>
+          <tr>
+            <th>Sr No</th>
+            <th>College Name</th>
+            <th>City</th>
+            <th>Google Map</th>
+            <th>Nearby Place</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- Data will be populated here -->
+        </tbody>
+      </table>
+      <!-- From Uiverse.io by PriyanshuGupta28 -->
+      <div id="loading" class="spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div id="loading" class="loading">Loading data...</div>
+      <div id="no-results" class="no-results" style="display: none;">No matching exam centres found.</div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col footer-about">
+          <h3>About Us</h3>
+          <p>Exam Centre Helper is dedicated to making exam days less stressful for students. We provide
+            comprehensive information about amenities and services around exam centers nationwide.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-col footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="policy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-contact">
+          <h3>Contact Info</h3>
+          <p><i class="fas fa-phone"></i> +91 7518007867</p>
+          <p><i class="fas fa-envelope"></i> nikhil.singh95556@gmail.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 Exam Centre Helper. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Configuration - Replace with your published Google Sheets CSV URL
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRnypSrr7KHF16FTKKE8SRMNfnAd8zrdU2U85emgrO4RJn2CerC5MWcHTRvLVK7K2A3WSiIu32eAKYc/pub?output=csv';
+
+    // Global variables
+    let centresData = [];
+    let filteredData = [];
+
+    // DOM elements
+    const searchInput = document.getElementById('search');
+    const cityFilter = document.getElementById('city');
+    const tableBody = document.getElementById('table-body');
+    const loadingElement = document.getElementById('loading');
+    const noResultsElement = document.getElementById('no-results');
+
+    // Initialize the application
+    function init() {
+      fetchData();
+      setupEventListeners();
+    }
+
+    // Fetch data from Google Sheets
+    function fetchData() {
+      loadingElement.style.display = 'block';
+      noResultsElement.style.display = 'none';
+
+      fetch(CSV_URL)
+        .then(response => response.text())
+        .then(csvData => {
+          parseCSVData(csvData);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          loadingElement.textContent = 'Error loading data. Please try again later.';
+        });
+    }
+
+    // Parse CSV data using PapaParse if available, otherwise manual parsing
+    function parseCSVData(csvData) {
+      // Try to use PapaParse if available
+      if (typeof Papa !== 'undefined') {
+        Papa.parse(csvData, {
+          header: true,
+          skipEmptyLines: true,
+          complete: function (results) {
+            processData(results.data);
+          },
+          error: function (error) {
+            console.error('Error parsing CSV with PapaParse:', error);
+            manualParseCSV(csvData);
+          }
+        });
+      } else {
+        manualParseCSV(csvData);
+      }
+    }
+
+    // Manual CSV parsing fallback
+    function manualParseCSV(csvData) {
+      const lines = csvData.split('\n');
+      const headers = lines[0].split(',').map(header => header.trim());
+
+      const data = [];
+      for (let i = 1; i < lines.length; i++) {
+        if (!lines[i].trim()) continue;
+
+        const values = lines[i].split(',').map(value => value.trim());
+        const entry = {};
+
+        headers.forEach((header, index) => {
+          entry[header] = values[index] || '';
+        });
+
+        data.push(entry);
+      }
+
+      processData(data);
+    }
+
+    // Process the parsed data
+    function processData(data) {
+      centresData = data;
+      filteredData = [...centresData];
+
+      // Populate city filter dropdown
+      populateCityFilter();
+
+      // Render the table
+      renderTable();
+
+      // Hide loading indicator
+      loadingElement.style.display = 'none';
+    }
+
+    // Populate city filter dropdown with unique cities
+    function populateCityFilter() {
+      const cities = [...new Set(centresData.map(item => item.City).filter(Boolean))].sort();
+
+      // Clear existing options (except the first "All Cities" option)
+      while (cityFilter.options.length > 1) {
+        cityFilter.remove(1);
+      }
+
+      // Add city options
+      cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        cityFilter.appendChild(option);
+      });
+    }
+
+    // Render the table with current data
+    function renderTable() {
+      // Clear existing table rows
+      tableBody.innerHTML = '';
+
+      if (filteredData.length === 0) {
+        noResultsElement.style.display = 'block';
+        return;
+      }
+
+      noResultsElement.style.display = 'none';
+
+      // Create rows for each centre
+      filteredData.forEach(centre => {
+        const row = document.createElement('tr');
+
+        // Sr No
+        const srNoCell = document.createElement('td');
+        srNoCell.textContent = centre['Sr No'] || '';
+        row.appendChild(srNoCell);
+
+        // College/Centre Name
+        const nameCell = document.createElement('td');
+        nameCell.textContent = centre['College Name'] || '';
+        row.appendChild(nameCell);
+
+        // City
+        const cityCell = document.createElement('td');
+        cityCell.textContent = centre.City || '';
+        row.appendChild(cityCell);
+
+        // Google Map Link
+        const mapCell = document.createElement('td');
+        if (centre['Google Map']) {
+          const mapLink = document.createElement('a');
+          mapLink.href = centre['Google Map'];
+          mapLink.textContent = 'View on Map';
+          mapLink.className = 'map-link';
+          mapLink.target = '_blank';
+          mapLink.rel = 'noopener noreferrer';
+          mapCell.appendChild(mapLink);
+        } else {
+          mapCell.textContent = 'N/A';
+        }
+        row.appendChild(mapCell);
+
+        // Nearby Place
+        const nearbyCell = document.createElement('td');
+        nearbyCell.textContent = centre['Nearby Place'] || '';
+        row.appendChild(nearbyCell);
+
+        // Add row to table
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Filter data based on search and city filters
+    function filterData() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedCity = cityFilter.value;
+
+      filteredData = centresData.filter(centre => {
+        // Filter by search term (case-insensitive)
+        const matchesSearch = searchTerm === '' ||
+          (centre['College Name'] &&
+            centre['College Name'].toLowerCase().includes(searchTerm));
+
+        // Filter by city
+        const matchesCity = selectedCity === '' || centre.City === selectedCity;
+
+        return matchesSearch && matchesCity;
+      });
+
+      renderTable();
+    }
+
+    // Set up event listeners
+    function setupEventListeners() {
+      searchInput.addEventListener('input', filterData);
+      cityFilter.addEventListener('change', filterData);
+    }
+
+    // Initialize the app when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+
+</html>
